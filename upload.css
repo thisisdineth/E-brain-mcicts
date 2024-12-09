@@ -1,0 +1,84 @@
+/* Styling for the Upload Article Page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f4f6;
+}
+
+header {
+    background-color: #0078D4;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    margin: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+#auth-status {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+#upload-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+input[type="text"], input[type="file"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+button {
+    background-color: #0078D4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005ea6;
+}
+
+#signOutBtn {
+    background-color: #ff3b30;
+    margin-top: 20px;
+    padding: 10px 20px;
+}
+
+#signOutBtn:hover {
+    background-color: #d32f2f;
+}
+
+#articleNameCount, #articleDescriptionCount {
+    font-size: 12px;
+    color: #666;
+}
+
+#articleNameCount, #articleDescriptionCount {
+    font-size: 14px;
+    color: red;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Article</title>
+    <link rel="stylesheet" href="upload.css">
+    <script defer src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/9.1.0/firebase-storage-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/9.1.0/firebase-database-compat.js"></script>
+    <script defer src="upload.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Upload Your Article</h1>
+        <div id="auth-status"></div>
+    </header>
+
+    <div class="container">
+        <div id="loader" style="display: none;"></div>
+        <div id="error-message" style="display: none;"></div>
+        
+        <div id="upload-form" style="display: none;">
+            <h2>Upload Article</h2>
+            <div class="form-group">
+                <input type="text" id="articleName" placeholder="Article Name*" maxlength="100" required>
+                <span id="articleNameCount">0/100</span>
+            </div>
+            <div class="form-group">
+                <textarea id="articleDescription" placeholder="Article Description*" maxlength="250" required></textarea>
+                <span id="articleDescriptionCount">0/250</span>
+            </div>
+            <div class="form-group">
+                <input type="text" id="articleTags" placeholder="Tags (comma-separated)" required>
+            </div>
+            <div class="form-group">
+                <input type="file" id="articleImage" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <input type="file" id="articleFile" accept="application/pdf" required>
+            </div>
+            <button onclick="uploadArticle()">Upload</button>
+        </div>
+
+        <button id="signOutBtn" onclick="signOut()">Sign Out</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 MCC - Upload Articles</p>
+    </footer>
+</body>
+</html>
