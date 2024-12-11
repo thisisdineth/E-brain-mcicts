@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Details</title>
+    <link rel="stylesheet" href="article.css">
+</head>
+<body>
+    <div id="loader" style="display:none;">Loading...</div>
+    
+    <div id="article-container" class="article-container">
+        <div id="article-header" class="article-header">
+            <img id="article-thumbnail" src="" alt="Article Thumbnail" class="article-thumbnail">
+            <h1 id="article-title"></h1>
+        </div>
+
+        <div id="article-body" class="article-body">
+            <embed id="article-pdf" src="" type="application/pdf" width="100%" height="600px">
+        </div>
+
+        <div id="author-info" class="author-info">
+            <div>
+                <img id="author-pic" src="" alt="Author Profile Pic" class="author-pic">
+                <span id="author-name"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
+    <script type="module" src="article.js"></script>
+
+</body>
+</html>
