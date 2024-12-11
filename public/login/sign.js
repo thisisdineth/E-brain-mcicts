@@ -99,7 +99,7 @@ function signUp() {
         })
         .then(() => {
             showLoader(false);
-            window.location.href = "./upload.html";
+            window.location.href = "../app/index.html";
         })
         .catch(error => {
             showLoader(false);
@@ -116,7 +116,7 @@ function signIn() {
     auth.signInWithEmailAndPassword(email, password)
         .then(() => {
             showLoader(false);
-            window.location.href = "./upload.html";
+            window.location.href = "../app/index.html";
         })
         .catch(error => {
             showLoader(false);

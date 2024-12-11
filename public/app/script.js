@@ -45,7 +45,7 @@ const firebaseConfig = {
         <div class="article-content">
             <h3 class="article-title" data-article-id="${articleId}">${article.name}</h3>
             <div class="author-info">
-                <img src="${user.profilePicture || './img/user.png'}" alt="Author" class="author-pic" data-author-id="${userId}">
+                <img src="${user.profilePicture || '../img/user.png'}" alt="Author" class="author-pic" data-author-id="${userId}">
                 <span class="author-name" data-author-id="${userId}">${user.name || 'Anonymous'}</span>
             </div>
         </div>
@@ -73,12 +73,12 @@ const firebaseConfig = {
   articlesContainer.addEventListener('click', (e) => {
     const articleId = e.target.getAttribute('data-article-id');
     if (articleId) {
-        window.location.href = `article.html?ARTICLEID=${articleId}`;
+        window.location.href = `../articles/index.html?ARTICLEID=${articleId}`;
     }
   
     const authorId = e.target.getAttribute('data-author-id');
     if (authorId) {
-        window.location.href = `author.html?UID=${authorId}`;
+        window.location.href = `../authors/index.html?UID=${authorId}`;
     }
   });
   
