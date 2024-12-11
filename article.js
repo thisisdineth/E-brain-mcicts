@@ -1,9 +1,8 @@
-// Import Firebase SDK components from the modular Firebase v9+ library
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"; // Import initializeApp
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
+import { getStorage, getDownloadURL, ref as storageRef } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
 
-// Firebase Configuration
+// Firebase configuration and initialization
 const firebaseConfig = {
     apiKey: "AIzaSyA-M8XsFZaZPu_lBIx0TbqcmzhTXeHRjQM",
     authDomain: "ecommerceapp-dab53.firebaseapp.com",
@@ -14,20 +13,20 @@ const firebaseConfig = {
     appId: "1:429988301014:web:4f09bb412b6cf0b4a82177"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const storage = getStorage(app);
 
-// Get the ARTICLEID from the URL
+// Get the article ID from URL
 const urlParams = new URLSearchParams(window.location.search);
 const articleId = urlParams.get('ARTICLEID');
+const loadingSpinner = document.getElementById('loading-spinner');
+const articleContainer = document.getElementById('article-container');
 
-if (!articleId) {
-    window.location.href = 'index.html'; // Redirect if no ARTICLEID is provided
-}
+// Show loading spinner
+loadingSpinner.style.display = 'block';
 
-// Fetch the article data from Firebase
+// Fetch the article data
 get(ref(db, 'users')).then(snapshot => {
     snapshot.forEach(userSnapshot => {
         const userId = userSnapshot.key;
@@ -36,18 +35,25 @@ get(ref(db, 'users')).then(snapshot => {
         if (articles && articles[articleId]) {
             const article = articles[articleId];
             const user = userSnapshot.val();
-            
-            // Display article details
+
+            // Set article data
             document.getElementById('article-title').innerText = article.name;
             document.getElementById('article-thumbnail').src = article.image;
             document.getElementById('article-pdf').src = article.pdf;
 
-            // Display author information
+            // Set author info
             document.getElementById('author-name').innerText = user.name || 'Anonymous';
+            document.getElementById('author-name').href = `author.html?UID=${userId}`;
             document.getElementById('author-pic').src = user.profilePicture || './img/user.png';
+            document.getElementById('author-pic').onclick = () => window.location.href = `author.html?UID=${userId}`;
+
+            // Hide loading spinner and show article content
+            loadingSpinner.style.display = 'none';
+            articleContainer.style.display = 'block';
         }
     });
 }).catch(error => {
     console.error("Error loading article:", error);
     document.getElementById('article-container').innerHTML = '<p>Error loading article.</p>';
+    loadingSpinner.style.display = 'none';
 });
