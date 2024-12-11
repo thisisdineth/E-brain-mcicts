@@ -43,9 +43,9 @@ get(ref(db, 'users')).then(snapshot => {
 
             // Set author info
             document.getElementById('author-name').innerText = user.name || 'Anonymous';
-            document.getElementById('author-name').href = `author.html?UID=${userId}`;
-            document.getElementById('author-pic').src = user.profilePicture || './img/user.png';
-            document.getElementById('author-pic').onclick = () => window.location.href = `author.html?UID=${userId}`;
+            document.getElementById('author-name').href = `../authors/index.html?UID=${userId}`;
+            document.getElementById('author-pic').src = user.profilePicture || '../img/user.png';
+            document.getElementById('author-pic').onclick = () => window.location.href = `../authors/index.html?UID=${userId}`;
 
             // Hide loading spinner and show article content
             loadingSpinner.style.display = 'none';
