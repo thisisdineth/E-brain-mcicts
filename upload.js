@@ -21,7 +21,7 @@ auth.onAuthStateChanged(user => {
         document.getElementById("auth-status").innerText = `Welcome ${user.displayName || user.email}`;
         document.getElementById('upload-form').style.display = 'block';
     } else {
-        window.location.href = 'sign.html';  // Redirect to sign-in page if not logged in
+        window.location.href = 'login.html';  // Redirect to sign-in page if not logged in
     }
 });
 
@@ -47,11 +47,10 @@ function updateCharacterCount(fieldId, maxLength) {
     }
 }
 
-// Handle Article Upload
 function uploadArticle() {
     const articleName = document.getElementById('articleName').value;
     const articleDescription = document.getElementById('articleDescription').value;
-    const articleTags = document.getElementById('articleTags').value.split(',');
+    const articleTags = document.getElementById('articleTags').value.split(',').map(tag => tag.trim());
     const articleImage = document.getElementById('articleImage').files[0];
     const articleFile = document.getElementById('articleFile').files[0];
 
@@ -73,25 +72,33 @@ function uploadArticle() {
     const articleData = {
         name: articleName,
         description: articleDescription,
-        tags: articleTags,
-        createdBy: user.uid,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        tags: articleTags.reduce((acc, tag, index) => {
+            acc[`tag_${index + 1}`] = tag;
+            return acc;
+        }, {}) // Save tags as individual properties under `tags`
     };
 
     // Upload image to Firebase Storage
-    const imageRef = storage.ref().child('articles/images/' + articleId + '/' + articleImage.name);
+    const imageRef = storage.ref().child(`articles/${user.uid}/thumbnails/${articleId}/${articleImage.name}`);
     imageRef.put(articleImage).then(imageSnapshot => {
         return imageSnapshot.ref.getDownloadURL().then(imageUrl => {
             articleData.image = imageUrl;
 
             // Upload PDF file to Firebase Storage
-            const pdfRef = storage.ref().child('articles/pdfs/' + articleId + '/' + articleFile.name);
+            const pdfRef = storage.ref().child(`articles/${user.uid}/pdfs/${articleId}/${articleFile.name}`);
             return pdfRef.put(articleFile).then(pdfSnapshot => {
                 return pdfSnapshot.ref.getDownloadURL().then(pdfUrl => {
                     articleData.pdf = pdfUrl;
 
                     // Save article data in Firebase Realtime Database
-                    return db.ref('articles/' + articleId).set(articleData).then(() => {
+                    return db.ref(`users/${user.uid}/articles/${articleId}`).set(articleData).then(() => {
+                        // Save each tag under `tags` node
+                        const tagsRef = db.ref(`users/${user.uid}/articles/${articleId}/tags`);
+                        articleTags.forEach((tag, index) => {
+                            tagsRef.child(`tag_${index + 1}`).set(tag);
+                        });
+
                         showLoader(false);
                         alert("Article uploaded successfully!");
                         document.getElementById('upload-form').reset(); // Reset the form
@@ -104,6 +111,8 @@ function uploadArticle() {
         showError(error.message);
     });
 }
+
+
 
 // Show Loader
 function showLoader(show) {
@@ -121,7 +130,7 @@ function showError(message) {
 // Sign out the user
 function signOut() {
     auth.signOut().then(() => {
-        window.location.href = 'sign.html';  // Redirect to sign-in page after sign-out
+        window.location.href = 'login.html';  // Redirect to sign-in page after sign-out
     }).catch(error => {
         showError(error.message);
     });
