@@ -7,44 +7,55 @@
     <link rel="stylesheet" href="article.css">
 </head>
 <body>
-
-    <!-- Header Navigation Bar -->
     <header>
-        <nav>
-            <ul>
-                <li><a href="../app/">Go Back to Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="article.html">Article</a></li>
-            </ul>
-        </nav>
+        <div class="header-container">
+            <div class="logo">
+                <img src="/public/img/club.png" alt="Magazine Logo" class="logo-img">
+            </div>
+            <h1 class="magazine-name">E-brain Digital Magazine</h1>
+        </div>
     </header>
+    <nav class="nav-bar">
+        <div class="hamburger-menu" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="#">Articles</a></li>
+            <li><a href="#">Blogs</a></li>
+            <li><a href="#">Upload Guide</a></li>
+        </ul>
+    </nav>
 
     <!-- Article Section -->
-    <section id="article-section">
+
         <!-- Loading Spinner -->
         <div id="loading-spinner" class="loading-spinner"></div>
 
+
         <!-- Article Container -->
+
         <div id="article-container" class="article-container">
             <!-- Hero Image (Article Thumbnail) -->
             <div class="hero-image">
                 <img id="article-thumbnail" alt="Article Thumbnail" />
             </div>
 
-            <!-- Article Title -->
-            <h1 id="article-title" class="article-title">Article Title</h1>
-
-            <!-- PDF Preview (Embedded) -->
-            <embed id="article-pdf" class="pdf-preview" type="application/pdf" />
-
-            <!-- Author Info -->
+                        <!-- Article Title -->
+                        <h1 id="article-title" class="article-title">Article Title</h1>
+                                    <!-- Author Info -->
             <div id="author-info" class="author-info">
-                <span>This article written by: </span>
+                <span>Article by:</span> &nbsp
                 <a id="author-name" href="#" class="author-name">Author Name</a>
                 <img id="author-pic" alt="Author Pic" class="author-pic" />
             </div>
+            <!-- PDF Preview (Embedded) -->
+            <embed id="article-pdf" class="pdf-preview" type="application/pdf" />
+
         </div>
-    </section>
+
 
     <script type="module" src="article.js"></script>
 </body>

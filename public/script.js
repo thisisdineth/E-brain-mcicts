@@ -73,12 +73,12 @@ const firebaseConfig = {
   articlesContainer.addEventListener('click', (e) => {
     const articleId = e.target.getAttribute('data-article-id');
     if (articleId) {
-        window.location.href = `../articles/index.html?ARTICLEID=${articleId}`;
+        window.location.href = `./articles/index.html?ARTICLEID=${articleId}`;
     }
   
     const authorId = e.target.getAttribute('data-author-id');
     if (authorId) {
-        window.location.href = `../authors/index.html?UID=${authorId}`;
+        window.location.href = `./authors/index.html?UID=${authorId}`;
     }
   });
   
