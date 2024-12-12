@@ -164,21 +164,24 @@ header {
 
 /* Hero Section */
 .hero {
-  background-image: url('https://via.placeholder.com/1200x600');
   background-size: cover;
   background-position: center;
-  text-align: center;
+  text-align: left; /* Align content to the left */
   color: #fff;
   padding: 60px 20px;
+  position: relative;
+  height: 400px; /* Set the height of the hero section */
 }
 
 .hero-content {
   background: rgba(0, 0, 0, 0.7);
   padding: 20px 30px;
   border-radius: 10px;
-  display: inline-block;
-  max-width: 600px;
-  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  transform: translateY(-50%);
+  max-width: 400px;
 }
 
 .hero-content h2 {
@@ -203,6 +206,18 @@ header {
 
 .btn-read-more:hover {
   background-color: #e67e22;
+}
+
+/* Slideshow Styling */
+@keyframes slide {
+  0% { background-image: url('../img/banner1.jpeg'); }
+  33% { background-image: url('../img/banner2.jpeg'); }
+  67% { background-image: url('../img/banner3.jpeg'); }
+  100% { background-image: url('../img/banner4.png'); }
+}
+
+.hero {
+  animation: slide 15s infinite;
 }
 
 /* Articles Section */
